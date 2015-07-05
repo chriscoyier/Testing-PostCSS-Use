@@ -1,0 +1,13 @@
+{
+  "name": "Testing-PostCSS-Use",
+  "version": "0.0.1",
+  "description": "",
+  "dependencies": {
+    "postcss": "~4.1.14",
+    "postcss-use": "~1.0.0",
+    "cssnext": "~1.8.0",
+    "cssnano": "~2.0.3",
+    "autoprefixer": "~5.2.0",
+    "postcss-discard-comments": "~1.2.0"
+  }
+}
