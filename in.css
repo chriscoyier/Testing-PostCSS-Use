@@ -1,5 +1,6 @@
-@use postcss-discard-comments(removeAll: true);
+@use postcss-discard-comments(removeAll: false);
 /*! test */
+/* this will get removed */
 h1 {
-    color: red
+    color: red;
 }
