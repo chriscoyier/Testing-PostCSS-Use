@@ -9,15 +9,6 @@ var postcss = require("postcss");
 // This is the plugin we want to use so that plugins can be referenced from code.
 var use = require("postcss-use");
 
-// These three are required by postcss-use
-// as referenced in the docs: https://github.com/postcss/postcss-use
-var cssnext = require("cssnext");
-var cssnano = require("cssnano");
-var autoprefixer = require("autoprefixer");
-
-// This plugin is just "available" to use
-var discardcomments = require("postcss-discard-comments");
-
 // Create the processor
 var processor = postcss([ use({ modules: [
   "postcss-discard-comments",
@@ -41,20 +32,23 @@ function warnings(result) {
   return warningArr;
 }
 
+function writeOut(path, name) {
+  var css = fs.readFileSync(path, "utf8");
+  var result = processor.process(css);
+
+  console.log("#######################################");
+  console.log("### " + name);
+  console.log("#######################################");
+  console.log("warnings:");
+  console.log(warnings(result));
+  console.log("result:");
+  console.log(result.css);
+}
 /******************************************************
  * postcss-discard-comments
  * NOTE: this works, as the instructions say it would.
 ********************************************************/
 
-var css = fs.readFileSync("in/discard-comments.css", "utf8");
-var result = processor.process(css);
-
-console.log("#######################################");
-console.log("### testing postcss-discard-comments");
-console.log("#######################################");
-console.log("warnings:");
-console.log(warnings(result));
-console.log("result:");
-console.log(result.css);
-
+writeOut("in/discard-comments.css", "postcss-discard-comments");
+writeOut("in/autoprefixer.css", "autoprefixer");
 
