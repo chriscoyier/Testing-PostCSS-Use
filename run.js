@@ -34,16 +34,19 @@ function warnings(result) {
 
 function writeOut(path, name) {
   var css = fs.readFileSync(path, "utf8");
-  var result = processor.process(css);
-
-  console.log("#######################################");
-  console.log("### " + name);
-  console.log("#######################################");
-  console.log("warnings:");
-  console.log(warnings(result));
-  console.log("result:");
-  console.log(result.css);
+  processor
+    .process(css)
+    .then(function(result) {
+      console.log("#######################################");
+      console.log("### " + name);
+      console.log("#######################################");
+      console.log("warnings:");
+      console.log(warnings(result));
+      console.log("result:");
+      console.log(result.css);
+    });
 }
+
 /******************************************************
  * postcss-discard-comments
  * NOTE: this works, as the instructions say it would.
