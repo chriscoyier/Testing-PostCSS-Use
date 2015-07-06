@@ -49,6 +49,9 @@ function writeOut(path, name) {
  * NOTE: this works, as the instructions say it would.
 ********************************************************/
 
+// works
 writeOut("in/discard-comments.css", "postcss-discard-comments");
 writeOut("in/autoprefixer.css", "autoprefixer");
+// broken
+writeOut("in/cssnext.css", "cssnext");
 
