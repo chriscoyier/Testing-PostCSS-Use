@@ -4,10 +4,12 @@ I'm just trying to get [postcss-use](https://github.com/postcss/postcss-use)
 working, but somethings going wrong.  I can get them running synchronously,
 but when you add a promise, the `result.css` does not get processed.
 
-Take a look at the `run.js` file.  In it, there are two functions: `async` and
-`sync`.  The `sync` calls work, returning the processed css from `result.css`.
-That would be that, if all the plugins worked synchronously, but cssnext does
-not, so we're trying to get `async` to work.
+Take a look at the
+[`run.js`](https://github.com/chriscoyier/Testing-PostCSS-Use/blob/master/run.js)
+file.  In it, there are two functions: `async` and `sync`.  The `sync` calls
+work, returning the processed css from `result.css`.  That would be that, if all
+the plugins worked synchronously, but cssnext does not, so we're trying to get
+`async` to work.
 
 In the `asyc` function we're using a promise and things are not working out.
 The `result.css` property is returning _unprocessed_ css.  What gives?
