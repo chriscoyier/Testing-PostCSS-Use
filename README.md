@@ -12,7 +12,9 @@ the plugins worked synchronously, but cssnext does not, so we're trying to get
 `async` to work.
 
 In the `asyc` function we're using a promise and things are not working out.
-The `result.css` property is returning _unprocessed_ css.  What gives?
+The `result.css` property is returning _unprocessed_ css.  What gives?  Is the
+argument to `.then(result)` not the same as the `result` returned by the
+non-promise call?
 
 ## List of plugins we'd like to support on CodePen at launch of PostCSS
 

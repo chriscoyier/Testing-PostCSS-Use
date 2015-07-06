@@ -39,7 +39,8 @@ function log(name, result) {
   console.log("warnings:");
   console.log(warnings(result));
   console.log("result:");
-  // WHY DOES THIS RETURN THE UNPROCESSED CSS?
+  // when chained in a promise, this does not return the
+  // processed css, only the unprocessed stuff
   console.log(result.css);
 }
 
@@ -63,10 +64,12 @@ function sync(path, name) {
 }
 
 
-// sync
+// this calls the processor, but without the promise chain.
+// it also returns the correct css
 sync("in/discard-comments.css", "postcss-discard-comments");
 
-// async
+// this calls the processor, but with a promise.
+// it does not return the correct value.
 async("in/discard-comments.css", "postcss-discard-comments");
 async("in/autoprefixer.css", "autoprefixer");
 async("in/cssnext.css", "cssnext");
