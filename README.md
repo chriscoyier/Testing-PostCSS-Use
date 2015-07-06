@@ -1,13 +1,6 @@
-I'm just trying to get [postcss-use](https://github.com/postcss/postcss-use) working.
-
-Some plugins work
-
-* postcss-discard-comments
-* autoprefixer
-
-Some don't
-
-* cssnext
+I'm just trying to get [postcss-use](https://github.com/postcss/postcss-use)
+working, but somethings going wrong.  I can get them running synchronously,
+but when you add a promise, the `result.css` does not get processed.
 
 ## List of plugins we'd like to support on CodePen at launch of PostCSS
 
