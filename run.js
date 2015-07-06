@@ -9,7 +9,7 @@ var postcss = require("postcss");
 // This is the plugin we want to use so that plugins can be referenced from code.
 var use = require("postcss-use");
 
-// Create the processor
+// use the use plugin
 var processor = postcss([ use({ modules: [
   "postcss-discard-comments",
   "autoprefixer",
@@ -18,8 +18,6 @@ var processor = postcss([ use({ modules: [
 ]);
 
 // Warnings collector
-
-
 function warnings(result) {
   var warningArr = [];
 
@@ -32,29 +30,28 @@ function warnings(result) {
   return warningArr;
 }
 
+// abstract the console.log calls for each plugin
 function writeOut(path, name) {
   var css = fs.readFileSync(path, "utf8");
   processor
     .process(css)
     .then(function(result) {
+      console.log(result);
       console.log("#######################################");
       console.log("### " + name);
       console.log("#######################################");
       console.log("warnings:");
       console.log(warnings(result));
       console.log("result:");
+      // WHY DOES THIS RETURN THE UNPROCESSED CSS?
       console.log(result.css);
+    })
+    .catch(function(error) {
+      console.log("errror " + error.message());
     });
 }
 
-/******************************************************
- * postcss-discard-comments
- * NOTE: this works, as the instructions say it would.
-********************************************************/
-
-// works
+// the output
 writeOut("in/discard-comments.css", "postcss-discard-comments");
 writeOut("in/autoprefixer.css", "autoprefixer");
-// broken
 writeOut("in/cssnext.css", "cssnext");
-
