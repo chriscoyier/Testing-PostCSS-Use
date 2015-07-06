@@ -10,12 +10,14 @@ var postcss = require("postcss");
 var use = require("postcss-use");
 
 // use the use plugin
-var processor = postcss([ use({ modules: [
-  "postcss-discard-comments",
-  "autoprefixer",
-  "cssnano",
-  "cssnext"]})
-]);
+function processor() {
+  return postcss([ use({ modules: [
+    "postcss-discard-comments",
+    "autoprefixer",
+    "cssnano",
+    "cssnext"]})
+  ]);
+}
 
 // Warnings collector
 function warnings(result) {
@@ -30,28 +32,41 @@ function warnings(result) {
   return warningArr;
 }
 
+function log(name, result) {
+  console.log("#######################################");
+  console.log("### " + name);
+  console.log("#######################################");
+  console.log("warnings:");
+  console.log(warnings(result));
+  console.log("result:");
+  // WHY DOES THIS RETURN THE UNPROCESSED CSS?
+  console.log(result.css);
+}
+
 // abstract the console.log calls for each plugin
-function writeOut(path, name) {
+function async(path, name) {
   var css = fs.readFileSync(path, "utf8");
-  processor
+  processor()
     .process(css)
     .then(function(result) {
-      console.log(result);
-      console.log("#######################################");
-      console.log("### " + name);
-      console.log("#######################################");
-      console.log("warnings:");
-      console.log(warnings(result));
-      console.log("result:");
-      // WHY DOES THIS RETURN THE UNPROCESSED CSS?
-      console.log(result.css);
+      log("async: " + name, result);
     })
     .catch(function(error) {
       console.log("errror " + error.message());
     });
 }
 
-// the output
-writeOut("in/discard-comments.css", "postcss-discard-comments");
-writeOut("in/autoprefixer.css", "autoprefixer");
-writeOut("in/cssnext.css", "cssnext");
+function sync(path, name) {
+  var css = fs.readFileSync(path, "utf8");
+  var result = processor().process(css);
+  log("sync: " + name, result);
+}
+
+
+// sync
+sync("in/discard-comments.css", "postcss-discard-comments");
+
+// async
+async("in/discard-comments.css", "postcss-discard-comments");
+async("in/autoprefixer.css", "autoprefixer");
+async("in/cssnext.css", "cssnext");
