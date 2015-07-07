@@ -1,0 +1,12 @@
+@use postcss-conditionals;
+
+.postcss-conditionals {}
+
+.foo {
+  @if 3 < 5 {
+    background: green;
+  }
+  @else {
+    background: blue;
+  }
+}

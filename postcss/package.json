@@ -1,0 +1,19 @@
+{
+  "name": "postcss",
+  "version": "0.0.1",
+  "dependencies": {
+    "autoprefixer": "^5.2.0",
+    "cssnext": "1.8.0",
+    "heredoc": "*",
+    "posix": "2.0.1",
+    "postcss": "4.1.15",
+    "postcss-conditionals": "^1.2.0",
+    "postcss-css-variables": "^0.4.0",
+    "postcss-custom-media": "^4.1.0",
+    "postcss-discard-comments": "^1.2.0",
+    "postcss-each": "^0.3.0",
+    "postcss-for": "^1.0.1",
+    "postcss-media-minmax": "^1.2.0",
+    "postcss-use": "^1.0.0"
+  }
+}

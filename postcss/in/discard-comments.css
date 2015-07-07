@@ -1,0 +1,8 @@
+@use postcss-discard-comments(removeAll: true);
+
+.discard-comments {}
+
+/*! test */
+h1 {
+    color: red
+}
